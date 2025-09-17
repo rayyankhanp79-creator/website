@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextage PK - Interactive Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Minimalist Monochrome -->
+    <!-- Application Structure Plan: The SPA is structured as a narrative journey to guide the user from brand discovery to product engagement. It begins with an immersive, full-screen hero section to establish the brand's identity. This is followed by a curated "New Arrivals" section to immediately showcase products. A high-contrast "Newsletter" CTA is placed strategically to capture user interest for remarketing. The structure concludes with a standard, comprehensive footer for trust and secondary navigation. This top-down flow is chosen for its intuitive user experience, prioritizing brand impact and product visibility over a complex, multi-page layout, making it ideal for a single-page application. -->
+    <!-- Visualization & Content Choices: 
+        - Header: Report Info -> Main Navigation. Goal -> Provide access to key pages. Viz/Method -> Animated HTML header. Interaction -> Appears on mouse hover at the top of the viewport. Justification -> Fulfills user request for a unique, clean, and interactive navigation that doesn't clutter the initial view. Library/Method -> Vanilla JS, CSS Transitions.
+        - Hero Section: Report Info -> Brand Slogan & Imagery. Goal -> Create a strong brand impression. Viz/Method -> Full-screen canvas animation background with animated text overlay and a CTA button. Interaction -> The abstract animation provides a dynamic, engaging background. Scroll-triggered fade-in and upward motion for text elements remains. Justification -> This approach directly addresses the user's request for a "fully animated hero image" by creating a performant, abstract visual that is more dynamic than a static image and more lightweight than a video. Library/Method -> Vanilla JS Canvas API, CSS Animations, Intersection Observer API.
+        - Product Showcase: Report Info -> "New Arrivals" products. Goal -> Display products for sale. Viz/Method -> A responsive grid of product cards (image, name, price). Interaction -> Cards animate in on scroll; individual cards have a lift-and-shadow effect on hover. Justification -> A grid is a scannable, standard e-commerce pattern. The micro-interactions provide satisfying visual feedback and encourage exploration. Product content is aligned with a fashion theme. Library/Method -> HTML/Tailwind CSS, Intersection Observer API.
+        - Newsletter CTA: Report Info -> Newsletter Signup. Goal -> Lead generation. Viz/Method -> A full-width section with a contrasting background to draw attention. Interaction -> Section animates in on scroll. Justification -> Placing a visually distinct CTA after the product section capitalizes on user engagement to build a marketing list. Library/Method -> HTML/Tailwind CSS, Intersection Observer API.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .hero-section {
+            background-color: #000;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+        .hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .animate-up {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.8s ease-out;
+        }
+        .animate-up.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .product-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .animated-header {
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .header-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .header-trigger {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            z-index: 60;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="header-trigger"></div>
+
+    <header id="main-header" class="animated-header bg-white shadow-md fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-800">Nextage PK</div>
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Home</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Shop</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">New Arrivals</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">About Us</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <canvas id="heroCanvas" class="hero-canvas"></canvas>
+            <div class="hero-overlay"></div>
+            <div class="hero-content space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold animate-up">STYLE. CONFIDENCE. NEXTAGE.</h1>
+                <p class="text-lg md:text-xl mt-4 animate-up" style="transition-delay: 100ms;">Experience the future of fashion with our exclusive collection.</p>
+                <a href="#products" class="inline-block bg-white text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-colors duration-300 animate-up" style="transition-delay: 200ms;">Explore Collection</a>
+            </div>
+        </section>
+
+        <section id="products" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2 animate-up">New Arrivals</h2>
+                    <p class="text-lg text-gray-600 animate-up" style="transition-delay: 100ms;">This section showcases our latest curated items to fuel your style. Each product is designed with quality and contemporary style in mind.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="product-card bg-gray-50 rounded-lg shadow-md overflow-hidden animate-up" style="transition-delay: 200ms;">
+                        <img src="https://placehold.co/600x600/f0e6e6/212529?text=Men's+Summer+Set" alt="Men's Summer Set" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Men's Summer Set</h3>
+                            <p class="text-gray-600 mt-2">Rs. 3,999</p>
+                            <button class="mt-4 bg-gray-900 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-700 transition-colors duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card bg-gray-50 rounded-lg shadow-md overflow-hidden animate-up" style="transition-delay: 300ms;">
+                        <img src="https://placehold.co/600x600/d8f0ff/212529?text=Women's+Jogger+Pants" alt="Women's Jogger Pants" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Women's Jogger Pants</h3>
+                            <p class="text-gray-600 mt-2">Rs. 2,599</p>
+                            <button class="mt-4 bg-gray-900 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-700 transition-colors duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card bg-gray-50 rounded-lg shadow-md overflow-hidden animate-up" style="transition-delay: 400ms;">
+                        <img src="https://placehold.co/600x600/b7e4c7/212529?text=Unisex+Hoodie" alt="Unisex Hoodie" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Unisex Hoodie</h3>
+                            <p class="text-gray-600 mt-2">Rs. 4,500</p>
+                            <button class="mt-4 bg-gray-900 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-700 transition-colors duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gray-900 text-white py-20 text-center">
+            <div class="container mx-auto px-6 space-y-4">
+                <h2 class="text-4xl font-bold animate-up">Join Our Newsletter</h2>
+                <p class="text-lg animate-up" style="transition-delay: 100ms;">This is your direct line to our latest drops and exclusive offers. By subscribing, you become part of the Nextage community and get first access to our newest styles and promotions.</p>
+                <div class="mt-8 flex justify-center animate-up" style="transition-delay: 200ms;">
+                    <input type="email" placeholder="Enter your email" class="w-full max-w-sm p-4 rounded-l-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300">
+                    <button class="bg-white text-gray-900 font-bold py-4 px-8 rounded-r-full shadow-lg hover:bg-gray-200 transition-colors duration-300">Subscribe</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Nextage PK</h3>
+                <p>Fashion forward. Quality crafted. Shop the latest trends with us.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">About Us</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Contact</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">FAQ</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Follow Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Facebook"><span class="text-2xl">FB</span></a>
+                    <a href="#" aria-label="Instagram"><span class="text-2xl">IG</span></a>
+                    <a href="#" aria-label="Twitter"><span class="text-2xl">TW</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 mt-8 pt-8 border-t border-gray-700">
+            <p>&copy; 2025 Nextage PK. Recreated Interactive Experience.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const elementsToAnimate = document.querySelectorAll('.animate-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            elementsToAnimate.forEach(el => observer.observe(el));
+
+            const headerTrigger = document.querySelector('.header-trigger');
+            const mainHeader = document.getElementById('main-header');
+
+            headerTrigger.addEventListener('mouseenter', () => {
+                mainHeader.classList.add('header-active');
+            });
+
+            mainHeader.addEventListener('mouseleave', () => {
+                mainHeader.classList.remove('header-active');
+            });
+
+            const canvas = document.getElementById('heroCanvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const numParticles = 100;
+            const particleRadius = 1;
+            const maxDistance = 150;
+
+            function setCanvasSize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function Particle() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1})`;
+            }
+
+            Particle.prototype.update = function() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            };
+
+            Particle.prototype.draw = function() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, particleRadius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            };
+
+            function connectParticles() {
+                for (let i = 0; i < numParticles; i++) {
+                    for (let j = i + 1; j < numParticles; j++) {
+                        const dist = Math.sqrt(Math.pow(particles[i].x - particles[j].x, 2) + Math.pow(particles[i].y - particles[j].y, 2));
+                        if (dist < maxDistance) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${1 - dist / maxDistance})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                            ctx.closePath();
+                        }
+                    }
+                }
+            }
+
+            function init() {
+                particles = [];
+                for (let i = 0; i < numParticles; i++) {
+                    particles.push(new Particle());
+                }
+                animate();
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                connectParticles();
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+
+            setCanvasSize();
+            window.addEventListener('resize', setCanvasSize);
+            init();
+        });
+    </script>
+</body>
+</html>
