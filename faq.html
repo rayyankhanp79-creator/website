@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextage PK - FAQs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* General Fade-In-Up Animation */
+        .animate-fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-fade-in-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header Animation */
+        .animated-header {
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .header-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .header-trigger {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            z-index: 60;
+        }
+
+        /* Accordion Content Animation */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .accordion-content.active {
+            max-height: 500px; /* A large value to accommodate content */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .accordion-icon.rotate {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <div class="header-trigger"></div>
+    <header id="main-header" class="animated-header bg-white shadow-md fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-800">Nextage PK</div>
+            <div class="flex space-x-6 items-center">
+                <a href="shop.html" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Shop All</a>
+                <a href="about.html" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">About Us</a>
+                <a href="faqs.html" class="text-gray-600 hover:text-gray-900 font-bold transition-colors duration-300">FAQs</a>
+                <a href="index.html" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Cart</a>
+                <!-- Search Icon -->
+                <button aria-label="Search" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+                <!-- Cart Icon -->
+                <button aria-label="Cart" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.182 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </button>
+                <!-- Profile Icon -->
+                <button aria-label="Profile" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 flex-grow">
+        <div class="max-w-4xl mx-auto pt-16">
+            <div class="text-center mb-10">
+                <h1 class="text-4xl font-bold text-gray-800 animate-fade-in-up">Frequently Asked Questions</h1>
+                <p class="text-lg text-gray-600 mt-2 animate-fade-in-up" style="transition-delay: 100ms;">Find answers to our most common queries.</p>
+            </div>
+
+            <!-- Accordion FAQ Section -->
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm animate-fade-in-up" style="transition-delay: 200ms;">
+                    <button class="w-full flex justify-between items-center text-left font-bold text-gray-800 focus:outline-none accordion-btn" aria-expanded="false" aria-controls="faq-1-content">
+                        <span>What payment methods do you accept?</span>
+                        <svg class="w-5 h-5 ml-4 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="faq-1-content" role="region" aria-hidden="true" class="accordion-content">
+                        <p class="text-gray-700">We accept all major credit cards, as well as digital payment options like PayPal and Apple Pay for your convenience.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm animate-fade-in-up" style="transition-delay: 300ms;">
+                    <button class="w-full flex justify-between items-center text-left font-bold text-gray-800 focus:outline-none accordion-btn" aria-expanded="false" aria-controls="faq-2-content">
+                        <span>How can I track my order?</span>
+                        <svg class="w-5 h-5 ml-4 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="faq-2-content" role="region" aria-hidden="true" class="accordion-content">
+                        <p class="text-gray-700">Once your order has been shipped, you will receive a confirmation email with a tracking number. You can use this number to track your package on our website or the courier's official site.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm animate-fade-in-up" style="transition-delay: 400ms;">
+                    <button class="w-full flex justify-between items-center text-left font-bold text-gray-800 focus:outline-none accordion-btn" aria-expanded="false" aria-controls="faq-3-content">
+                        <span>What is your return policy?</span>
+                        <svg class="w-5 h-5 ml-4 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="faq-3-content" role="region" aria-hidden="true" class="accordion-content">
+                        <p class="text-gray-700">We offer a 30-day return policy on all unworn and unwashed items. Please visit our returns page for detailed instructions on how to process a return or exchange.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm animate-fade-in-up" style="transition-delay: 500ms;">
+                    <button class="w-full flex justify-between items-center text-left font-bold text-gray-800 focus:outline-none accordion-btn" aria-expanded="false" aria-controls="faq-4-content">
+                        <span>Do you ship internationally?</span>
+                        <svg class="w-5 h-5 ml-4 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="faq-4-content" role="region" aria-hidden="true" class="accordion-content">
+                        <p class="text-gray-700">Currently, we only ship within Pakistan. We are working to expand our shipping destinations in the near future. Subscribe to our newsletter to stay updated!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-12 mt-auto">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Nextage PK</h3>
+                <p>Fashion forward. Quality crafted. Shop the latest trends with us.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">About Us</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Contact</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">FAQ</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Follow Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Facebook"><span class="text-2xl">FB</span></a>
+                    <a href="#" aria-label="Instagram"><span class="text-2xl">IG</span></a>
+                    <a href="#" aria-label="Twitter"><span class="text-2xl">TW</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 mt-8 pt-8 border-t border-gray-700">
+            <p>&copy; 2025 Nextage PK. Recreated Interactive Experience.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fade-in-up animation on scroll
+            const elementsToAnimate = document.querySelectorAll('.animate-fade-in-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            elementsToAnimate.forEach(el => observer.observe(el));
+
+            // Header animation logic
+            const headerTrigger = document.querySelector('.header-trigger');
+            const mainHeader = document.getElementById('main-header');
+
+            headerTrigger.addEventListener('mouseenter', () => {
+                mainHeader.classList.add('header-active');
+            });
+            mainHeader.addEventListener('mouseleave', () => {
+                mainHeader.classList.remove('header-active');
+            });
+
+            // Accordion functionality
+            const accordionBtns = document.querySelectorAll('.accordion-btn');
+
+            accordionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = document.getElementById(btn.getAttribute('aria-controls'));
+                    const icon = btn.querySelector('.accordion-icon');
+                    const isExpanded = btn.getAttribute('aria-expanded') === 'true' || false;
+
+                    // Close any other open accordion items
+                    document.querySelectorAll('.accordion-btn[aria-expanded="true"]').forEach(openBtn => {
+                        if (openBtn !== btn) {
+                            openBtn.setAttribute('aria-expanded', 'false');
+                            document.getElementById(openBtn.getAttribute('aria-controls')).classList.remove('active');
+                            openBtn.querySelector('.accordion-icon').classList.remove('rotate');
+                        }
+                    });
+
+                    // Toggle the clicked item
+                    btn.setAttribute('aria-expanded', !isExpanded);
+                    content.classList.toggle('active');
+                    icon.classList.toggle('rotate');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

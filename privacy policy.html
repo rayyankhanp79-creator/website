@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextage PK - Privacy Policy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* General Fade-In-Up Animation */
+        .animate-fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-fade-in-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header Animation */
+        .animated-header {
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .header-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .header-trigger {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            z-index: 60;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <div class="header-trigger"></div>
+    <header id="main-header" class="animated-header bg-white shadow-md fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-800">Nextage PK</div>
+            <div class="flex space-x-6 items-center">
+                <a href="shop.html" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Shop All</a>
+                <a href="about.html" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">About Us</a>
+                <a href="faqs.html" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">FAQs</a>
+                <a href="index.html" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Cart</a>
+                <!-- Search Icon -->
+                <button aria-label="Search" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+                <!-- Cart Icon -->
+                <button aria-label="Cart" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.182 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </button>
+                <!-- Profile Icon -->
+                <button aria-label="Profile" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 flex-grow">
+        <div class="max-w-4xl mx-auto pt-16">
+            <div class="text-center mb-10">
+                <h1 class="text-4xl font-bold text-gray-800 animate-fade-in-up">Privacy Policy</h1>
+                <p class="text-lg text-gray-600 mt-2 animate-fade-in-up" style="transition-delay: 100ms;">Your privacy is important to us. This policy outlines how we collect and use your data.</p>
+            </div>
+
+            <section class="bg-white p-8 rounded-lg shadow-sm mb-8 animate-fade-in-up" style="transition-delay: 200ms;">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">1. Information We Collect</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    We collect personal information that you voluntarily provide to us when you register on our website, place an order, or contact us. This may include your name, email address, shipping address, and payment information. We also collect non-personal information such as your IP address and browsing behavior to improve our services and website experience.
+                </p>
+            </section>
+
+            <section class="bg-white p-8 rounded-lg shadow-sm mb-8 animate-fade-in-up" style="transition-delay: 400ms;">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">2. How We Use Your Information</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    Your information is used to process your orders, communicate with you about your purchase, provide customer support, and personalize your shopping experience. We may also use your information to send you marketing and promotional materials, which you can opt out of at any time. We will never sell your personal information to third parties.
+                </p>
+            </section>
+
+            <section class="bg-white p-8 rounded-lg shadow-sm mb-8 animate-fade-in-up" style="transition-delay: 600ms;">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">3. Data Security</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    We implement a variety of security measures to maintain the safety of your personal information. Your data is stored on secure servers and protected by encryption protocols. We strive to use commercially acceptable means to protect your personal information, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure.
+                </p>
+            </section>
+            
+            <section class="bg-white p-8 rounded-lg shadow-sm mb-8 animate-fade-in-up" style="transition-delay: 800ms;">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">4. Your Rights</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    You have the right to access, update, or delete your personal information at any time by contacting us. You may also request a copy of the data we hold about you. We will respond to your request in a timely manner and in accordance with applicable laws.
+                </p>
+            </section>
+            
+            <section class="bg-white p-8 rounded-lg shadow-sm animate-fade-in-up" style="transition-delay: 1000ms;">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">5. Changes to This Policy</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page. We encourage you to review this policy periodically for any updates.
+                </p>
+            </section>
+            
+            <section class="bg-white p-8 rounded-lg shadow-sm mt-8 animate-fade-in-up" style="transition-delay: 1200ms;">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">6. Contact Us</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    If you have any questions about this Privacy Policy, please contact us at support@nextagepk.com.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-12 mt-auto">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Nextage PK</h3>
+                <p>Fashion forward. Quality crafted. Shop the latest trends with us.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">About Us</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Contact</a></li>
+                    <li><a href="faqs.html" class="hover:text-white transition-colors duration-300">FAQ</a></li>
+                    <li><a href="privacy_policy.html" class="hover:text-white transition-colors duration-300">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Follow Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Facebook"><span class="text-2xl">FB</span></a>
+                    <a href="#" aria-label="Instagram"><span class="text-2xl">IG</span></a>
+                    <a href="#" aria-label="Twitter"><span class="text-2xl">TW</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 mt-8 pt-8 border-t border-gray-700">
+            <p>&copy; 2025 Nextage PK. Recreated Interactive Experience.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fade-in-up animation on scroll
+            const elementsToAnimate = document.querySelectorAll('.animate-fade-in-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            elementsToAnimate.forEach(el => observer.observe(el));
+
+            // Header animation logic
+            const headerTrigger = document.querySelector('.header-trigger');
+            const mainHeader = document.getElementById('main-header');
+
+            headerTrigger.addEventListener('mouseenter', () => {
+                mainHeader.classList.add('header-active');
+            });
+            mainHeader.addEventListener('mouseleave', () => {
+                mainHeader.classList.remove('header-active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextage PK - New Arrivals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Splash Screen Animation */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a202c;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+        }
+        .splash-logo {
+            font-size: 3rem;
+            font-weight: bold;
+            animation: fadeInScale 1s ease-out forwards;
+        }
+        .splash-subtext {
+            animation: fadeIn 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* General Scroll Animation */
+        .animate-up {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.8s ease-out;
+        }
+        .animate-up.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Product Card Specific Animations */
+        .product-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .shop-now-btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        .shop-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .shop-now-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.5s ease-in-out;
+            transform: skewX(-20deg);
+        }
+        .shop-now-btn:hover::after {
+            left: 100%;
+        }
+
+        /* Header Animation */
+        .animated-header {
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .header-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .header-trigger {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            z-index: 60;
+        }
+
+        /* Page Section Display */
+        .page-section {
+            display: none;
+        }
+        .page-section.active-page {
+            display: block;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="splash-screen">
+        <h1 class="splash-logo">Nextage PK</h1>
+        <p class="mt-2 text-xl splash-subtext">Interactive Product Experience</p>
+    </div>
+
+    <div class="header-trigger"></div>
+
+    <header id="main-header" class="animated-header bg-white shadow-md fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-800">Nextage PK</div>
+            <div class="flex space-x-6">
+                <a href="#" data-page="new-arrivals" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">New Arrivals</a>
+                <a href="#" data-page="about" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">About Us</a>
+                <a href="#" data-page="contact" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="new-arrivals" data-page="new-arrivals" class="py-20 bg-white page-section active-page">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2 animate-up">New Arrivals</h2>
+                    <p class="text-lg text-gray-600 animate-up" style="transition-delay: 100ms;">This section showcases our latest curated items to fuel your style. Each product is designed with quality and contemporary style in mind.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product Card 1 -->
+                    <div class="product-card bg-gray-50 rounded-lg shadow-md overflow-hidden animate-up" style="transition-delay: 200ms;">
+                        <img src="https://placehold.co/600x600/f0e6e6/212529?text=Men's+Winter+Tracksuit" alt="Men's Winter Tracksuit" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Men's Winter Tracksuit</h3>
+                            <p class="text-gray-600 mt-2">Rs. 3,999</p>
+                            <button class="shop-now-btn mt-4 bg-gray-900 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-700 transition-colors duration-300">Shop Now</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 2 -->
+                    <div class="product-card bg-gray-50 rounded-lg shadow-md overflow-hidden animate-up" style="transition-delay: 300ms;">
+                        <img src="https://placehold.co/600x600/d8f0ff/212529?text=Women's+Jogger+Pants" alt="Women's Jogger Pants" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Women's Jogger Pants</h3>
+                            <p class="text-gray-600 mt-2">Rs. 2,599</p>
+                            <button class="shop-now-btn mt-4 bg-gray-900 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-700 transition-colors duration-300">Shop Now</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 3 -->
+                    <div class="product-card bg-gray-50 rounded-lg shadow-md overflow-hidden animate-up" style="transition-delay: 400ms;">
+                        <img src="https://placehold.co/600x600/b7e4c7/212529?text=Unisex+Hoodie" alt="Unisex Hoodie" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Unisex Hoodie</h3>
+                            <p class="text-gray-600 mt-2">Rs. 4,500</p>
+                            <button class="shop-now-btn mt-4 bg-gray-900 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-700 transition-colors duration-300">Shop Now</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 4 -->
+                    <div class="product-card bg-gray-50 rounded-lg shadow-md overflow-hidden animate-up" style="transition-delay: 500ms;">
+                        <img src="https://placehold.co/600x600/c7b7e4/212529?text=Slim+Fit+Jeans" alt="Slim Fit Jeans" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Slim Fit Jeans</h3>
+                            <p class="text-gray-600 mt-2">Rs. 5,200</p>
+                            <button class="shop-now-btn mt-4 bg-gray-900 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-700 transition-colors duration-300">Shop Now</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 5 -->
+                    <div class="product-card bg-gray-50 rounded-lg shadow-md overflow-hidden animate-up" style="transition-delay: 600ms;">
+                        <img src="https://placehold.co/600x600/e4d7b7/212529?text=Oversized+T-Shirt" alt="Oversized T-Shirt" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Oversized T-Shirt</h3>
+                            <p class="text-gray-600 mt-2">Rs. 1,850</p>
+                            <button class="shop-now-btn mt-4 bg-gray-900 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-700 transition-colors duration-300">Shop Now</button>
+                        </div>
+                    </div>
+                    <!-- Product Card 6 -->
+                    <div class="product-card bg-gray-50 rounded-lg shadow-md overflow-hidden animate-up" style="transition-delay: 700ms;">
+                        <img src="https://placehold.co/600x600/b7e4d7/212529?text=Cargo+Shorts" alt="Cargo Shorts" class="w-full h-auto object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Cargo Shorts</h3>
+                            <p class="text-gray-600 mt-2">Rs. 2,999</p>
+                            <button class="shop-now-btn mt-4 bg-gray-900 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-700 transition-colors duration-300">Shop Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="newsletter" data-page="newsletter" class="bg-gray-900 text-white py-20 text-center page-section">
+            <div class="container mx-auto px-6 space-y-4">
+                <h2 class="text-4xl font-bold animate-up">Join Our Newsletter</h2>
+                <p class="text-lg animate-up" style="transition-delay: 100ms;">This is your direct line to our latest drops and exclusive offers. By subscribing, you become part of the Nextage community and get first access to our newest styles and promotions.</p>
+                <div class="mt-8 flex justify-center animate-up" style="transition-delay: 200ms;">
+                    <input type="email" placeholder="Enter your email" class="w-full max-w-sm p-4 rounded-l-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300">
+                    <button class="bg-white text-gray-900 font-bold py-4 px-8 rounded-r-full shadow-lg hover:bg-gray-200 transition-colors duration-300">Subscribe</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" data-page="contact" class="py-20 bg-white page-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2 animate-up">Get in Touch</h2>
+                    <p class="text-lg text-gray-600 animate-up" style="transition-delay: 100ms;">We're here to help! Whether you have a question about our products, an order, or just want to say hello, we'd love to hear from you. Please fill out the form below or use the contact details provided.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+                    <div class="bg-gray-50 rounded-lg p-8 shadow-lg animate-up" style="transition-delay: 200ms;">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Send Us a Message</h3>
+                        <form action="#" method="POST" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                                <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                                <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-gray-900 text-white font-bold py-3 px-8 rounded-full shadow-lg contact-submit-button">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="flex flex-col justify-center animate-up" style="transition-delay: 300ms;">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Contact Details</h3>
+                        <ul class="space-y-6 text-gray-600">
+                            <li class="flex items-center space-x-4">
+                                <span class="bg-gray-900 text-white p-3 rounded-full">@</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Email Address</h4>
+                                    <p>NextageClothing@gmail.com</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center space-x-4">
+                                <span class="bg-gray-900 text-white p-3 rounded-full">📞</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Support Numbers</h4>
+                                    <p>+92 310 6228383</p>
+                                    <p>+92 309 0299696</p>
+                                    <p>+92 41 8408632</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center space-x-4">
+                                <span class="bg-gray-900 text-white p-3 rounded-full">📍</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Our Address</h4>
+                                    <p>Chak Number 224 RB Fateh Din Wali, Peoples Colony No.2, Near Bhorewala Chowk Faisalabad.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Nextage PK</h3>
+                <p>Fashion forward. Quality crafted. Shop the latest trends with us.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" data-page="about" class="hover:text-white transition-colors duration-300">About Us</a></li>
+                    <li><a href="#" data-page="contact" class="hover:text-white transition-colors duration-300">Contact</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">FAQ</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">Follow Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Facebook"><span class="text-2xl">FB</span></a>
+                    <a href="#" aria-label="Instagram"><span class="text-2xl">IG</span></a>
+                    <a href="#" aria-label="Twitter"><span class="text-2xl">TW</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 mt-8 pt-8 border-t border-gray-700">
+            <p>&copy; 2025 Nextage PK. Recreated Interactive Experience.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                setTimeout(() => splashScreen.style.display = 'none', 1000);
+            }, 2000);
+
+            const elementsToAnimate = document.querySelectorAll('.animate-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            elementsToAnimate.forEach(el => observer.observe(el));
+
+            const headerTrigger = document.querySelector('.header-trigger');
+            const mainHeader = document.getElementById('main-header');
+
+            headerTrigger.addEventListener('mouseenter', () => {
+                mainHeader.classList.add('header-active');
+            });
+
+            mainHeader.addEventListener('mouseleave', () => {
+                mainHeader.classList.remove('header-active');
+            });
+            
+            const pageLinks = document.querySelectorAll('nav a, a[data-page]');
+            const pageSections = document.querySelectorAll('.page-section');
+
+            pageLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageName = e.target.getAttribute('data-page');
+                    pageSections.forEach(section => {
+                        section.classList.remove('active-page');
+                    });
+                    const targetSection = document.querySelector(`[data-page="${pageName}"]`);
+                    if (targetSection) {
+                        targetSection.classList.add('active-page');
+                        // Re-trigger animations on page change
+                        const animatedElements = targetSection.querySelectorAll('.animate-up');
+                        animatedElements.forEach(el => {
+                            el.classList.remove('active');
+                            void el.offsetWidth; // Trigger reflow
+                            el.classList.add('active');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
