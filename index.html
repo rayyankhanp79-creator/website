@@ -89,22 +89,87 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="min-h-screen">
 
-    <div class="header-trigger"></div>
+<header class="bg-white shadow-md sticky top-0 z-50 animated-header">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="#" class="flex-shrink-0 text-2xl font-bold text-gray-800">YourBrand</a>
 
-    <header id="main-header" class="animated-header bg-white shadow-md fixed w-full top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-gray-800">Nextage PK</div>
-            <div class="flex space-x-6">
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Home</a>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Shop</a>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">New Arrivals</a>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">About Us</a>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Contact</a>
-            </div>
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex flex-1 justify-center space-x-10">
+            <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Home</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Shop All</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">New Arrivals</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">About Us</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Contact Us</a>
         </nav>
-    </header>
+
+        <!-- Icons and Mobile Menu Button -->
+        <div class="flex items-center space-x-6">
+            <!-- Search Icon -->
+            <button id="search-button" class="text-gray-600 hover:text-gray-900 animate-icon-pop">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+
+            <!-- Profile Icon -->
+            <a href="#" id="profile-button" class="text-gray-600 hover:text-gray-900 animate-icon-pop">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+            </a>
+
+            <!-- Cart Icon -->
+            <a href="#" id="cart-button" class="text-gray-600 hover:text-gray-900 relative animate-icon-pop">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H2.4m4.6 8l.2 4h10.6l.2-4M7 13L5.4 5H2.4m4.6 8h10.6m-12 0l-.2 4h10.6l.2-4m-12 4L6 19l4-2.5V20l4-2.5V20m-4-11l4-2.5V5l-4-2.5V5" />
+                </svg>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+            </a>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="lg:hidden text-gray-600 hover:text-gray-900">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <nav class="lg:hidden bg-white shadow-lg py-4 px-4 hidden" id="mobile-menu">
+        <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200">Home</a>
+        <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200 mt-1">Shop All</a>
+        <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200 mt-1">New Arrivals</a>
+        <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200 mt-1">About Us</a>
+        <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200 mt-1">Contact Us</a>
+    </nav>
+</header>
+
+<!-- Main content placeholder -->
+<main class="container mx-auto p-8">
+    <div class="text-center text-gray-500">
+        <h1 class="text-3xl font-bold">Your Website Content Goes Here</h1>
+        <p class="mt-4">This is a placeholder for the main content of your webpage.</p>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Simple script to toggle the mobile menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    });
+</script>
+
+</body>
+</html>
 
     <main>
         <section class="hero-section">
@@ -296,3 +361,4 @@
     </script>
 </body>
 </html>
+
